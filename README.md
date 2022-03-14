@@ -7,6 +7,8 @@
 - Easy to maintenance code
 
 You can try it [here](https://a-givertzman.github.io/js-widget/){:target="_blank"}
+*click below*
+<a href="https://a-givertzman.github.io/js-widget/" target="_blank">Try here</a>
 or using example below
 
 #### index.html
