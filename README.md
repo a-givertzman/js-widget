@@ -39,10 +39,10 @@ import { TextOverflow, TextWidget } from "../../src/js-widgets/text.js";
 import { CrossAxisAlignment, MainAxisAlignment } from "../../src/js-widgets/alignment.js";
 import { Expanded } from "../../src/js-widgets/expanded.js";
 
-const app1 = new MaterialApp({
-    title: 'Тест',
+const app = new MaterialApp({
+    title: 'Try js-widget',
     home: new Scaffold({
-        title: 'Test',
+        title: 'Try js-widget',
         child: new Row({
             children: [
                 new Column({
@@ -118,7 +118,7 @@ const app1 = new MaterialApp({
     }),
 });
 
-app1.run();
+app.run();
 
 ```
 
