@@ -1,5 +1,5 @@
 # js-widget
-### JavaScript framework to build object oriented web application
+### JavaScript framework to build object-oriented fast and light web application, easy to test and maintain
 
 - This is imperative code style
 - Js code looks nice
