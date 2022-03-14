@@ -28,6 +28,7 @@
 
 #### main.js
 ```
+"use strict";
 import { MaterialApp } from "../../src/js-widgets/material_app.js";
 import { Scaffold } from "../../src/js-widgets/scaffold.js";
 import { Center } from "../../src/js-widgets/center.js";
