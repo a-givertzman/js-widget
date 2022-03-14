@@ -118,3 +118,13 @@ const app1 = new MaterialApp({
 app1.run();
 
 ```
+
+This is my attempt to implement object-oriented js code. And i used some principles to make it in right way. I was inspired by the book Elegant Objects by Egor Bugaenko.
+- No static methods
+- No mutable objects
+- No inheritance 
+- No monster or good classes 
+- No null, use objects instead… Employer.NOT FOUND or EMPTY, which is not null, it is normal object, but it behaves differently 
+- Don’t use singletons 
+- Use fail fast approach, do not protect them from crashing, it should be crashed as fast as possible
+- Give right names to the objects
