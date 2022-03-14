@@ -6,7 +6,7 @@
 - Easy to implement code
 - Easy to maintenance code
 
-You can try it [here](https://a-givertzman.github.io/js-widget/)
+You can try it [here](https://a-givertzman.github.io/js-widget/){:target="_blank" rel="noopener"}
 or use example below
 
 #### index.html
