@@ -6,6 +6,9 @@
 - Easy to implement code
 - Easy to maintenance code
 
+You can try it [here](/)
+or use example below
+
 #### index.html
 ```
 <!DOCTYPE html>
