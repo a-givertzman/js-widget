@@ -6,7 +6,7 @@
 - Easy to implement code
 - Easy to maintenance code
 
-You can try it [here](/)
+You can try it [here](https://a-givertzman.github.io/js-widget/)
 or use example below
 
 #### index.html
