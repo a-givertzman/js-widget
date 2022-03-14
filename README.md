@@ -6,9 +6,7 @@
 - Easy to implement code
 - Easy to maintenance code
 
-You can try it 
-<a href="https://a-givertzman.github.io/js-widget/" target="_blank">here</a>
-or using example below
+#### You can try it <a href="https://a-givertzman.github.io/js-widget/" target="_blank">here</a> or using example below
 
 #### index.html
 ```
