@@ -12,13 +12,14 @@
         console.info(`Your browser doesn't support native JavaScript modules.`);
     </script>
     <script>
-        function load_js(src, type) {
+        function load_js(src, type = null) {
             var head = document.getElementsByTagName('head')[0];
             var script = document.createElement('script');
             script.src= src + `?v=${Date.now()}`;
-            script.type = type;
+            if (type) script.type = type;
             head.appendChild(script);
         }
+        load_js("../../src/plugins/debug/debug.js");
         load_js("./main.js", "module");
     </script>
 </head>

@@ -33,12 +33,22 @@ import { TextOverflow, TextWidget } from "../../../src/js-widgets/text.js";
 import { CrossAxisAlignment, MainAxisAlignment } from "../../../src/js-widgets/alignment.js";
 import { TextButton } from "../../../src/js-widgets/text_button.js";
 import { Expanded } from "../../../src/js-widgets/expanded.js";
+import { SearchField } from "../../../src/js-widgets/search_field.js";
+import { SizedBox } from "../../../src/js-widgets/sizedbox.js";
 
-export class SecondPage {
+const items = [
+    {id: '0', name: 'item 0'},
+    {id: '1', name: 'item 1'},
+    {id: '2', name: 'item 2'},
+    {id: '3', name: 'item 3'},
+];
+
+export class SearcchFieldPage {
+    #debug = true;
     #widget;
     constructor({}={}) {
         this.#widget = new Scaffold({
-            title: 'Second Page',
+            title: 'Search Field Page',
             child: new Column({
                 children: [
                     new Expanded({
@@ -50,13 +60,13 @@ export class SecondPage {
                                 children: [
                                     new TextButton({
                                         onPressed: event => {
-                                            this.#widget.close({result: 'SecondPageResult'});
+                                            this.#widget.close({result: 'SearchFieldPageResult'});
                                         },
                                         child: new TextWidget('←', {
                                             style: {...menuHeaderTextStyle, ...{fontSize: 16}},
-                                        }),
+                                        })
                                     }),
-                                    new TextWidget('Second Page', {
+                                    new TextWidget('Search Field Page', {
                                         style: {...menuHeaderTextStyle, ...{fontSize: 16}},
                                     }),
                                     new TextWidget('icon', {
@@ -68,16 +78,36 @@ export class SecondPage {
                     }),
                     new Expanded({
                         child: new Container({
-                            color: '#50aa50',
+                            color: '#aa5050',
                             child: new Center({
                                 child: new Container({
-                                    child: new TextWidget(
-                                        'Second Page Content', {
-                                        overflow: TextOverflow.clip,
-                                    }),
                                     color: '#f2f2f2',
                                     width: 200,
                                     height: 200,
+                                    child: new Column({
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        children: [
+                                            new TextWidget(
+                                                'Try search field:', {
+                                                overflow: TextOverflow.clip,
+                                            }),
+                                            new SizedBox({height: 8}),
+                                            new SearchField({
+                                                itemCount: items.length,
+                                                itemBuilder: (index) => {
+                                                    log(this.#debug, 'item: ', items[index].id + ' | ' + items[index].name);
+                                                    return new TextWidget(
+                                                        items[index].id + ' | ' + items[index].name, {
+                                                        key: items[index].id,
+                                                    });
+                                                },
+                                                placeholder: 'search...',
+                                                valueField: 'id',
+                                                labelField: 'title',
+                                                searchField: ['id', 'title'],
+                                            }),
+                                        ],
+                                    }),
                                 }),
                             }),
                         }),

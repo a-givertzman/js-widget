@@ -24,7 +24,6 @@
  */
 
 import { Widget } from "./widget.js";
-import { log } from "../plugins/debug/debug.js";
 
 /**
  * Текстовая кнопка

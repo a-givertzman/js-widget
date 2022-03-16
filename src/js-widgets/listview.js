@@ -26,7 +26,6 @@
 import { CrossAxisAlignment, MainAxisAlignment } from "./alignment.js";
 import { MultiWidget } from "./multi_widget.js";
 import { Axis } from "./orientation.js";
-import { log } from "../plugins/debug/debug.js";
 
 /**
  * Список виджетов со скролом
@@ -36,26 +35,29 @@ import { log } from "../plugins/debug/debug.js";
 export class ListView {
     #debug = false;
     #children;
+    #itemCount;
     #itemBuilder;
     #mainAxisAlignment;
     #crossAxisAlignment;
     #direction;
     #widget;
     constructor({
-        children = [], 
+        children, 
+        itemCount,
         itemBuilder = () => {},
         mainAxisAlignment = MainAxisAlignment.start, 
         crossAxisAlignment = CrossAxisAlignment.center,
         direction = Axis.vertical,
     }={}) {
         this.#children = children;
+        this.#itemCount = this.#children ? this.#children.length : itemCount;
         this.#itemBuilder = itemBuilder;
         this.#mainAxisAlignment = mainAxisAlignment;
         this.#crossAxisAlignment = crossAxisAlignment;
         this.#direction = direction;
         this.#widget = new MultiWidget({
             tagName: 'ul',
-            itemCount: this.#children.length,
+            itemCount: this.#itemCount,
             itemBuilder: (index) => {
                 return this.#itemBuilder(index);
                 // return this.#children[index];

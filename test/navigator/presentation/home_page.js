@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { log } from "../../../src/plugins/debug/debug.js";
+
 import { menuHeaderTextStyle } from "./app_styles.js";
 import { SizedBox } from "../../../src/js-widgets/sizedbox.js";
 import { Center } from "../../../src/js-widgets/center.js";
@@ -37,7 +37,9 @@ import { MaterialRoute } from "../../../src/js-widgets/material_route.js";
 import { FirstPage } from "./first_page.js";
 import { SecondPage } from "./second_page.js";
 import { ThirdPage } from "./third_page.js";
+import { TestInputPage } from "./test_input_page.js";
 import { Expanded } from "../../../src/js-widgets/expanded.js";
+import { SearcchFieldPage } from "./search_field_page.js";
 
 export class HomePage {
     #widget;
@@ -75,10 +77,10 @@ export class HomePage {
                             color: '#aaaaaa',
                             child: new Center({
                                 child: new Container({
-                                    // width: Number.MAX_VALUE,
-                                    // height: Number.MAX_VALUE,
+                                    width: 200,
                                     child: new Column({
                                         mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.stretch,
                                         children: [
                                             new TextButton({
                                                 child: new TextWidget('First Page', {
@@ -117,6 +119,34 @@ export class HomePage {
                                                         new MaterialRoute({
                                                             path: '/thirdPage',
                                                             widget: new ThirdPage({}),
+                                                        }),
+                                                    );
+                                                },
+                                            }),
+                                            new SizedBox({height: 10}),
+                                            new TextButton({
+                                                child: new TextWidget('Test Input Page', {
+                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                }),
+                                                onPressed: (e) => {
+                                                    this.navigateTo(
+                                                        new MaterialRoute({
+                                                            path: '/TestInputPage',
+                                                            widget: new TestInputPage({}),
+                                                        }),
+                                                    );
+                                                },
+                                            }),
+                                            new SizedBox({height: 10}),
+                                            new TextButton({
+                                                child: new TextWidget('Search Field Page', {
+                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                }),
+                                                onPressed: (e) => {
+                                                    this.navigateTo(
+                                                        new MaterialRoute({
+                                                            path: '/SearchFieldPage',
+                                                            widget: new SearcchFieldPage({}),
                                                         }),
                                                     );
                                                 },

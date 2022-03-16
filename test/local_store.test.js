@@ -24,7 +24,6 @@
  */
 
 import { LocalStore } from "../src/js-widgets/local_store/local_store.js";
-import { log } from "../src/plugins/debug/debug.js";
 
 const _debug = true;
 const localStore = new LocalStore({

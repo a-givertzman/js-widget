@@ -23,8 +23,6 @@
  * SOFTWARE.
  */
 
-import { log } from "../plugins/debug/debug.js";
-
 /**
  * Базовый классс 
  * Создает елемент в дерве DOM

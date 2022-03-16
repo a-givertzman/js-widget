@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { log } from "../../../src/plugins/debug/debug.js";
+
 import { menuHeaderTextStyle } from "./app_styles.js";
 import { Center } from "../../../src/js-widgets/center.js";
 import { Container } from "../../../src/js-widgets/container.js";

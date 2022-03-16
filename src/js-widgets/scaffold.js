@@ -24,7 +24,6 @@
  */
 
 import { Widget } from "./widget.js";
-import { log } from "../plugins/debug/debug.js";
 
  /**
  * Создает объект приложение
@@ -61,7 +60,7 @@ export class Scaffold {
             cssClass: [
                 'scaffold-widget',
                 'scaffold-widget-slide-in',
-            ]
+            ],
         });
     }
     build() {
@@ -69,6 +68,11 @@ export class Scaffold {
         if (!element) {
             throw new Error(`[Scaffold] error building child "${this.#widget.constructor.name}"`);
         }
+        document.title = this.#title;
+        const lastChild = document.body.lastChild;
+        setTimeout(() => {
+            lastChild.hidden = true;
+        }, 200);
         document.body.appendChild(element);
         log(this.#debug, '[Scaffold.build] this: ', this);
         log(this.#debug, '[Scaffold.build] element: ', element);

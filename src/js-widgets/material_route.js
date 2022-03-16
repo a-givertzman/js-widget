@@ -24,7 +24,6 @@
  */
 
 import { Widget } from "./widget.js";
-import { log } from "../plugins/debug/debug.js";
 
 /**
  * Путь к одной конкретной страничке приложения
@@ -37,6 +36,7 @@ export class MaterialRoute {
     #path;      // внутренний путь к страничке
     #widget;    // страничка приложения
     #htmlElement;
+    #prevTitle;
     constructor({
         path,
         widget
@@ -51,24 +51,26 @@ export class MaterialRoute {
     get path() {
         return this.#path;
     }
-    hide() {
-        this.#widget.htmlElement.hidden = false;
-    }
-    show() {
-        this.#widget.htmlElement.hidden = true;
-    }
+    // hide() {
+    //     this.#widget.htmlElement.hidden = false;
+    // }
+    // show() {
+    //     this.#widget.htmlElement.hidden = true;
+    // }
     build() {
+        this.#prevTitle = document.title;
         const widget = this.#widget.build();
         this.#htmlElement = widget.htmlElement;
         return new Promise((resolve, reject) => {
             widget.onComplete(result => {
                 log(this.#debug, '[MaterialRoute.build] child result: ', result);
+                document.title = this.#prevTitle;
+                widget.htmlElement.previousSibling.hidden = false;
                 widget.htmlElement.classList.remove('scaffold-widget-slide-in')
                 widget.htmlElement.classList.add('scaffold-widget-slide-out')
                 setTimeout(() => {
                     widget.htmlElement.remove();
                 }, 200);
-                // widget.htmlElement.remove();
                 resolve(result);
             });
         });
