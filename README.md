@@ -127,8 +127,8 @@ This is my attempt to implement object-oriented js code. And i used some princip
 - No mutable objects
 - No inheritance 
 - No monster or good classes 
+- No singletons 
 - No null, use objects instead… Employer.NOT FOUND or EMPTY, which is not null, it is normal object, but it behaves differently 
-- Don’t use singletons 
 - Use fail fast approach, do not protect them from crashing, it should be crashed as fast as possible
 - Give right names to the objects
 - Build everything using decorator pattern
