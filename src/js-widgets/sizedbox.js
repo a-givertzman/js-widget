@@ -54,6 +54,8 @@ export class SizedBox {
         const el = this.#widget.build().htmlElement;
         el.style.width = this.#width ? `${this.#width}px` : '';
         el.style.height = this.#height ? `${this.#height}px` : '';
+        el.style.maxWidth = this.#width ? `${this.#width}px` : '';
+        el.style.maxHeight = this.#height ? `${this.#height}px` : '';
         // el.style.backgroundColor = 'transparent';
         return this;
     }

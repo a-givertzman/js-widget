@@ -1,28 +1,40 @@
 /* Паддинги и бордеры всех элементов не изменяют размер элемента */
 *{
+    outline: none;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: inherit;
+    flex-shrink: 0;
 }
 
 html,
 body {
+    display: flex;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .container-widget {
-    overflow: hidden;
+    display: flex;
+    overflow: auto;
+    flex: 1 0;
     /* width: 100%; */
     /* height: 100%; */
 }
 .sized-box-widget,
 .material-app-widget,
 .scaffold-widget {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex: 1 0 auto;
+    /* width: 100%; */
+    /* height: 100%; */
+}
+.sized-box-widget {
+    /* max-width: min-content; */
+    /* max-height: min-content; */
 }
 @keyframes slideInFromRight {
     0% {
@@ -49,7 +61,7 @@ body {
     }
 }
 .scaffold-widget {
-    position: absolute;
+    /* position: absolute; */
     background-color: #ffffff;
 }
 .scaffold-widget-slide-in {
@@ -63,9 +75,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+    overflow: auto;
+    flex: 1 0;
+    /* width: 100%; */
+    /* height: 100%; */
     /* flex-direction: column; */
 }
 
@@ -75,9 +88,10 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+    flex: 1 0;
+    /* overflow: auto; */
+    /* width: 100%;
+    height: 100%; */
 }
 
 .row-widget {
@@ -86,9 +100,10 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+    flex: 1 0;
+    /* overflow: auto; */
+    /* width: 100%;
+    height: 100%; */
 }
 
 .list-view-widget {
@@ -99,10 +114,11 @@ body {
     align-items: center;
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    overflow-y: auto;
+    flex: 1 0;
+    /* height: 100%;
+    width: 100%; */
+    /* overflow-x: auto; */
+    /* overflow-y: auto; */
     list-style-type: none;
     margin-block-start: 0em;
     margin-block-end: 0em;
@@ -142,4 +158,32 @@ body {
 .text-button-widget:active {
     background-color: #BF7330;
     box-shadow: none;
+}
+.search-field-widget {
+    display: flex;
+    flex: 0 0 auto;
+}
+.single-child-scroll-vertial-widget,
+.single-child-scroll-horizontal-widget {
+    display: flex;
+    flex: 1 0 auto;
+    /* width: 100%;
+    height: 100%; */
+}
+/* .single-child-scroll-vertial-widget > *,
+.single-child-scroll-horizontal-widget > * {
+    flex: 1 0 100%;
+} */
+.single-child-scroll-vertial-widget > ul > *,
+.single-child-scroll-horizontal-widget > ul > * {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: content;
+}
+
+.single-child-scroll-vertial-widget {
+    overflow-y: scroll;
+}
+.single-child-scroll-horizontal-widget {
+    overflow-x: scroll;
 }

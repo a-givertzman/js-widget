@@ -86,7 +86,8 @@ export class TestInputPage {
                                             new TextWidget('Номер телефона:', {
                                                 style: {
                                                     // ...appThemeData.textTheme.headline6, 
-                                                    ...{color: '#000000'}
+                                                    ...menuHeaderTextStyle,
+                                                    ...{fontSize: 16, color: '#000000'}
                                                 }
                                             }),
                                             new SizedBox({height: 8}),
@@ -97,8 +98,8 @@ export class TestInputPage {
                                                         border: Border.all({color: '#cccccc', width: 1})
                                                     }),
                                                     style: {
-                                                        ...{fontSize: 16}, 
-                                                        ...{color: '#000000'}
+                                                        ...menuHeaderTextStyle,
+                                                        ...{fontSize: 16, color: '#000000'}
                                                     },
                                                     onChanged: (value) => {
                                                         // this.#onLoginChanged(value);
@@ -112,8 +113,9 @@ export class TestInputPage {
                                             new TextWidget('Пароль:', {
                                                 style: {
                                                     // ...appThemeData.textTheme.headline6, 
-                                                    ...{color: '#000000'}
-                                                },
+                                                    ...menuHeaderTextStyle,
+                                                    ...{fontSize: 16, color: '#000000'}
+                                            },
                                             }),
                                             new SizedBox({height: 8}),
                                             new Padding({
@@ -141,7 +143,8 @@ export class TestInputPage {
                                                     'вход', {
                                                     style: {
                                                         // ...appThemeData.textTheme.headline6, 
-                                                        ...{color: '#000000'}
+                                                        ...menuHeaderTextStyle,
+                                                        ...{fontSize: 16, color: '#000000'}
                                                     },
                                                 }),
                                                 style: new ButtonStyle({

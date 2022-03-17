@@ -40,7 +40,20 @@ const items = [
     {id: '0', name: 'item 0'},
     {id: '1', name: 'item 1'},
     {id: '2', name: 'item 2'},
-    {id: '3', name: 'item 3'},
+    {id: '3', name: 'item 3 s,ejhafv sdfvmhsf v,jsbhv ,'},
+    {id: '4', name: 'item 4'},
+    {id: '5', name: 'item 5'},
+    {id: '6', name: 'item 6'},
+    {id: '7', name: 'item 7'},
+    {id: '8', name: 'item 8'},
+    {id: '9', name: 'item 9'},
+    {id: '10', name: 'item 10'},
+    {id: '11', name: 'item 11'},
+    {id: '12', name: 'item 12'},
+    {id: '13', name: 'item 13'},
+    {id: '14', name: 'item 14'},
+    {id: '15', name: 'item 15'},
+    {id: '16', name: 'item 16'},
 ];
 
 export class SearcchFieldPage {
@@ -79,36 +92,43 @@ export class SearcchFieldPage {
                     new Expanded({
                         child: new Container({
                             color: '#aa5050',
-                            child: new Center({
-                                child: new Container({
-                                    color: '#f2f2f2',
-                                    width: 200,
-                                    height: 200,
-                                    child: new Column({
-                                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        children: [
-                                            new TextWidget(
-                                                'Try search field:', {
-                                                overflow: TextOverflow.clip,
-                                            }),
-                                            new SizedBox({height: 8}),
-                                            new SearchField({
-                                                itemCount: items.length,
-                                                itemBuilder: (index) => {
-                                                    log(this.#debug, 'item: ', items[index].id + ' | ' + items[index].name);
-                                                    return new TextWidget(
-                                                        items[index].id + ' | ' + items[index].name, {
-                                                        key: items[index].id,
-                                                    });
-                                                },
-                                                placeholder: 'search...',
-                                                valueField: 'id',
-                                                labelField: 'title',
-                                                searchField: ['id', 'title'],
-                                            }),
-                                        ],
+                            child: new Column({
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                    new TextWidget(
+                                        'Try search field:', {
+                                        overflow: TextOverflow.clip,
                                     }),
-                                }),
+                                    new SizedBox({height: 8}),
+                                    new SearchField({
+                                        itemCount: items.length,
+                                        itemBuilder: (index) => {
+                                            log(this.#debug, 'item: ', items[index].id + ' | ' + items[index].name);
+                                            return new TextWidget(
+                                                items[index].id + ' | ' + items[index].name, {
+                                                key: items[index].id,
+                                            });
+                                        },
+                                        placeholder: 'search...',
+                                        valueField: 'id',
+                                        labelField: 'title',
+                                        searchField: ['id', 'title'],
+                                    }),
+                                    new Center({
+                                        child: new Container({
+                                            color: '#f2f2f2',
+                                            width: 500,
+                                            height: 500,
+                                            child: new Column({
+                                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                                children: [
+        
+                                                ],
+                                            }),
+                                        }),
+                                    }),
+                                ],
                             }),
                         }),
                     }),

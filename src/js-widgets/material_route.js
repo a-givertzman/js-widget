@@ -65,7 +65,7 @@ export class MaterialRoute {
             widget.onComplete(result => {
                 log(this.#debug, '[MaterialRoute.build] child result: ', result);
                 document.title = this.#prevTitle;
-                widget.htmlElement.previousSibling.hidden = false;
+                widget.htmlElement.previousSibling.style.display = 'flex';
                 widget.htmlElement.classList.remove('scaffold-widget-slide-in')
                 widget.htmlElement.classList.add('scaffold-widget-slide-out')
                 setTimeout(() => {

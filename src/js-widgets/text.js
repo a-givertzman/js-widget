@@ -52,7 +52,7 @@ export class TextWidget {
         element.innerHTML = this.#data;
         element.style.color = this.#style?.color;
         element.style.backgroundColor = this.#style?.backgroundColor;
-        element.style.fontSize = this.#style ? `${this.#style.fontSize}px` : 'inherit';
+        element.style.fontSize = this.#style?.fontSize ? `${this.#style.fontSize}px` : 'inherit';
         element.style.fontFamily = this.#style?.fontFamily ?? 'inherit';
         element.style.fontWeight = this.#style?.fontWeight ?? 'inherit';
         element.style.height = this.#style?.height;

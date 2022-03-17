@@ -71,7 +71,8 @@ export class Scaffold {
         document.title = this.#title;
         const lastChild = document.body.lastChild;
         setTimeout(() => {
-            lastChild.hidden = true;
+            if (lastChild?.style) 
+                lastChild.style.display = 'none';
         }, 200);
         document.body.appendChild(element);
         log(this.#debug, '[Scaffold.build] this: ', this);

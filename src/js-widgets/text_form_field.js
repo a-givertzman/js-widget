@@ -132,6 +132,7 @@ export class TextFormField {
         element.style.fontFamily = this.#style?.fontFamily;
         element.style.fontWeight = this.#style?.fontWeight;
         element.style.height = this.#style?.height;
+        element.style.width = this.#style?.width;
         element.style.overflow = this.#style?.overflow;
         element.style.textAlign = this.#textAlign;
         const border = this.#decoration.border.build();

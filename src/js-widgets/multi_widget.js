@@ -78,6 +78,7 @@ export class MultiWidget {
                 const item = this.#itemBuilder(index);
                 log(this.#debug, '[MultyWidget] index: ', index, ' item: ', item);
                 const childWidget = item.build();
+                childWidget.htmlElement.flex = '0 1 auto';
                 this.#htmlElement.appendChild(
                     childWidget.htmlElement
                 );

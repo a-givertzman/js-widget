@@ -28,6 +28,8 @@ import { TextFormField } from "./text_form_field.js";
 import { ListView } from "./listview.js";
 import { Widget } from "./widget.js";
 import { InputDecoration } from "./input_decoration.js";
+import { SingleChildScrollView } from "./single_child_scroll_view.js";
+import { CrossAxisAlignment, MainAxisAlignment, TextAlign } from "./alignment.js";
  
 /**
  * Поисковая строка с выпадающим списком
@@ -66,7 +68,18 @@ export class SearchField {
         this.#labelField = labelField;
         this.#searchField = searchField;
         this.#cssClass = cssClass;
+        this.#listWidget = new SingleChildScrollView({
+            child: new ListView({
+                itemCount: this.#itemCount,
+                itemBuilder: (index) => {
+                    const item = this.#itemBuilder(index);
+                    return item
+                },
+            }),
+        });
         this.#inputWidget = new TextFormField({
+            textAlign: TextAlign.start,
+            style: {...{backgroundColor: '#dddddd', fontSize: 16, widget: 400}},
             decoration: new InputDecoration({
                 hintText: this.hintText,
             }),
@@ -78,14 +91,10 @@ export class SearchField {
                 }
             }
         });
-        this.#listWidget = new ListView({
-            itemCount: this.#itemCount,
-            itemBuilder: (index) => {
-                return this.#itemBuilder(index);
-            },
-        });
         this.#widget = new Widget({
             child: new Column({
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                     this.#inputWidget,
                     this.#listWidget,
@@ -98,6 +107,12 @@ export class SearchField {
     }
     build() {
         this.#widget.build();
+        // this.#widget.htmlElement.flex = '1 0';
+        this.#listWidget.htmlElement.parentNode.style.position = 'relative';
+        this.#listWidget.htmlElement.style.position = 'absolute';
+        this.#listWidget.htmlElement.style.backgroundColor = '#dddddd';
+        this.#listWidget.htmlElement.style.top = '18px';
+        this.#listWidget.htmlElement.style.maxHeight = '150px';
         this.#listWidget.htmlElement.style.display = 'none';
         log(this.#debug, '[SearchField.build] child: ', this.htmlElement);
         return this;
