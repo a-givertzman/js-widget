@@ -131,3 +131,4 @@ This is my attempt to implement object-oriented js code. And i used some princip
 - Don’t use singletons 
 - Use fail fast approach, do not protect them from crashing, it should be crashed as fast as possible
 - Give right names to the objects
+- Build everything using decorator pattern
