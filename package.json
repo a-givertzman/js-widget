@@ -1,0 +1,29 @@
+{
+  "name": "js-widget",
+  "version": "0.0.1",
+  "description": "JavaScript framework to build object-oriented fast and lightweight web application, easy to understand, test and maintain",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-givertzman/js-widget.git"
+  },
+  "keywords": [
+    "framework",
+    "web",
+    "js",
+    "oop",
+    "elegant-objects"
+  ],
+  "author": "anton lobanov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/a-givertzman/js-widget/issues"
+  },
+  "homepage": "https://github.com/a-givertzman/js-widget#readme"
+}
