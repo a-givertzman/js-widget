@@ -2,11 +2,12 @@
   "name": "js-widget",
   "version": "0.0.1",
   "description": "JavaScript framework to build object-oriented fast and lightweight web application, easy to understand, test and maintain",
-  "main": "main.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "build": "rm -rf dist/* && parcel build ./src/index.js --dist-dir dist --public-url ./",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
