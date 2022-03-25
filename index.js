@@ -425,6 +425,7 @@ class $fa2aeb152cbb2444$export$e47c8ffac61d2711 {
     #style;
     #focusNode;
     #autofocus;
+    #widget;
     constructor({ child: child , onPressed: onPressed , onLongPress: onLongPress , onHover: onHover , onFocusChange: onFocusChange , style: style , focusNode: focusNode , autofocus: autofocus = false ,  } = {}){
         this.#child = child;
         this.#onPressed = onPressed;

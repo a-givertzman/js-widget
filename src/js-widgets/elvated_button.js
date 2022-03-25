@@ -39,6 +39,7 @@ export class ElevatedButton {
     #style;
     #focusNode;
     #autofocus;
+    #widget;
     constructor({
         child, 
         onPressed, 
