@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/a-givertzman/js-widget/issues"
   },
-  "homepage": "https://github.com/a-givertzman/js-widget#readme"
+  "homepage": "https://github.com/a-givertzman/js-widget#readme",
+  "devDependencies": {
+    "parcel": "^2.4.0"
+  }
 }
