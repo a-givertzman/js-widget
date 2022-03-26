@@ -1,0 +1,1 @@
+{"mappings":"AAAA,SAASA,IAAIC,KAAUC,GACfD,GACAE,QAAQH,OAAOE","sources":["src/plugins/debug/debug.js"],"sourcesContent":["function log(debug, ...args) {\n    if (debug) {\n        console.log(...args);\n    }\n}"],"names":["log","debug","args","console"],"version":3,"file":"index.1379c922.js.map"}
