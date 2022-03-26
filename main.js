@@ -22,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { MaterialApp } from "./src/js-widgets/material_app.js";
+import { MaterialApp } from "js-widget/material_app.js";
 import { HomePage } from "./test/navigator/presentation/home_page.js";
 
 /**

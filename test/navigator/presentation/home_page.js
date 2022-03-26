@@ -24,22 +24,23 @@
  */
 
 import { menuHeaderTextStyle } from "./app_styles.js";
-import { SizedBox } from "../../../src/js-widgets/sizedbox.js";
-import { Center } from "../../../src/js-widgets/center.js";
-import { Container } from "../../../src/js-widgets/container.js";
-import { Row } from "../../../src/js-widgets/row.js";
-import { Column } from "../../../src/js-widgets/column.js";
-import { Scaffold } from "../../../src/js-widgets/scaffold.js";
-import { TextOverflow, TextWidget } from "../../../src/js-widgets/text.js";
-import { CrossAxisAlignment, MainAxisAlignment } from "../../../src/js-widgets/alignment.js";
-import { TextButton } from "../../../src/js-widgets/text_button.js";
-import { MaterialRoute } from "../../../src/js-widgets/material_route.js";
+import { SizedBox } from "../../../src/lib/sizedbox.js";
+import { Center } from "../../../src/lib/center.js";
+import { Container } from "../../../src/lib/container.js";
+import { Row } from "../../../src/lib/row.js";
+import { Column } from "../../../src/lib/column.js";
+import { Scaffold } from "../../../src/lib/scaffold.js";
+import { TextOverflow, TextWidget } from "../../../src/lib/text.js";
+import { CrossAxisAlignment, MainAxisAlignment } from "../../../src/lib/alignment.js";
+import { TextButton } from "../../../src/lib/text_button.js";
+import { MaterialRoute } from "../../../src/lib/material_route.js";
 import { FirstPage } from "./first_page.js";
 import { SecondPage } from "./second_page.js";
 import { ThirdPage } from "./third_page.js";
 import { TestInputPage } from "./test_input_page.js";
-import { Expanded } from "../../../src/js-widgets/expanded.js";
+import { Expanded } from "../../../src/lib/expanded.js";
 import { SearcchFieldPage } from "./search_field_page.js";
+import { StreamPage } from "../../stream/stream_page.js";
 
 export class HomePage {
     #widget;
@@ -147,6 +148,20 @@ export class HomePage {
                                                         new MaterialRoute({
                                                             path: '/SearchFieldPage',
                                                             widget: new SearcchFieldPage({}),
+                                                        }),
+                                                    );
+                                                },
+                                            }),
+                                            new SizedBox({height: 10}),
+                                            new TextButton({
+                                                child: new TextWidget('Stream Page', {
+                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                }),
+                                                onPressed: (e) => {
+                                                    this.navigateTo(
+                                                        new MaterialRoute({
+                                                            path: '/StreamPage',
+                                                            widget: new StreamPage({}),
                                                         }),
                                                     );
                                                 },

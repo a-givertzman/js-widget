@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-import { LocalStore } from "../src/js-widgets/local_store/local_store.js";
+import { LocalStore } from "../src/lib/local_store/local_store.js";
 
 const _debug = true;
 const localStore = new LocalStore({

@@ -24,22 +24,22 @@
  */
 
 import { menuHeaderTextStyle } from "./app_styles.js";
-import { Center } from "../../../src/js-widgets/center.js";
-import { Container } from "../../../src/js-widgets/container.js";
-import { Row } from "../../../src/js-widgets/row.js";
-import { Column } from "../../../src/js-widgets/column.js";
-import { Scaffold } from "../../../src/js-widgets/scaffold.js";
-import { TextOverflow, TextWidget } from "../../../src/js-widgets/text.js";
-import { CrossAxisAlignment, MainAxisAlignment } from "../../../src/js-widgets/alignment.js";
-import { TextButton } from "../../../src/js-widgets/text_button.js";
-import { Expanded } from "../../../src/js-widgets/expanded.js";
-import { TextFormField } from "../../../src/js-widgets/text_form_field.js";
-import { ButtonStyle } from "../../../src/js-widgets/button_style.js";
-import { SizedBox } from "../../../src/js-widgets/sizedbox.js";
-import { Padding } from "../../../src/js-widgets/padding.js";
-import { InputDecoration } from "../../../src/js-widgets/input_decoration.js";
-import { Border } from "../../../src/js-widgets/border.js";
-import { EdgeInsets } from "../../../src/js-widgets/edge_insets.js";
+import { Center } from "../../../src/lib/center.js";
+import { Container } from "../../../src/lib/container.js";
+import { Row } from "../../../src/lib/row.js";
+import { Column } from "../../../src/lib/column.js";
+import { Scaffold } from "../../../src/lib/scaffold.js";
+import { TextOverflow, TextWidget } from "../../../src/lib/text.js";
+import { CrossAxisAlignment, MainAxisAlignment } from "../../../src/lib/alignment.js";
+import { TextButton } from "../../../src/lib/text_button.js";
+import { Expanded } from "../../../src/lib/expanded.js";
+import { TextFormField } from "../../../src/lib/text_form_field.js";
+import { ButtonStyle } from "../../../src/lib/button_style.js";
+import { SizedBox } from "../../../src/lib/sizedbox.js";
+import { Padding } from "../../../src/lib/padding.js";
+import { InputDecoration } from "../../../src/lib/input_decoration.js";
+import { Border } from "../../../src/lib/border.js";
+import { EdgeInsets } from "../../../src/lib/edge_insets.js";
 
 export class TestInputPage {
     #widget;

@@ -24,17 +24,17 @@
  */
 
 import { menuHeaderTextStyle } from "./app_styles.js";
-import { Center } from "../../../src/js-widgets/center.js";
-import { Container } from "../../../src/js-widgets/container.js";
-import { Row } from "../../../src/js-widgets/row.js";
-import { Column } from "../../../src/js-widgets/column.js";
-import { Scaffold } from "../../../src/js-widgets/scaffold.js";
-import { TextOverflow, TextWidget } from "../../../src/js-widgets/text.js";
-import { CrossAxisAlignment, MainAxisAlignment } from "../../../src/js-widgets/alignment.js";
-import { TextButton } from "../../../src/js-widgets/text_button.js";
-import { Expanded } from "../../../src/js-widgets/expanded.js";
-import { SearchField } from "../../../src/js-widgets/search_field.js";
-import { SizedBox } from "../../../src/js-widgets/sizedbox.js";
+import { Center } from "../../../src/lib/center.js";
+import { Container } from "../../../src/lib/container.js";
+import { Row } from "../../../src/lib/row.js";
+import { Column } from "../../../src/lib/column.js";
+import { Scaffold } from "../../../src/lib/scaffold.js";
+import { TextOverflow, TextWidget } from "../../../src/lib/text.js";
+import { CrossAxisAlignment, MainAxisAlignment } from "../../../src/lib/alignment.js";
+import { TextButton } from "../../../src/lib/text_button.js";
+import { Expanded } from "../../../src/lib/expanded.js";
+import { SearchField } from "../../../src/lib/search_field.js";
+import { SizedBox } from "../../../src/lib/sizedbox.js";
 
 const items = [
     {id: '0', name: 'item 0'},

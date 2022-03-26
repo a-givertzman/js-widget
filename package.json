@@ -2,15 +2,17 @@
   "name": "js-widget",
   "version": "0.0.3",
   "description": "JavaScript framework to build object-oriented fast and lightweight web application, easy to understand, test and maintain",
-  "main": "index.js",
-  "module": "dist/$1.js",
+  "source": "./index.html",
   "directories": {
     "test": "test"
   },
+  "alias": {
+    "js-widget/**": "/src/lib/$1"
+  },
   "scripts": {
-    "debug": "rm -rf dist/* && parcel ./src/index.js",
-    "build": "rm -rf dist/* && parcel build ./src/js-widgets/*.js --dist-dir dist --public-url ./",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "debug": "rm -rf dist/* && parcel ./index.html",
+    "build": "rm -rf dist/* && parcel build ./index.html --dist-dir dist --public-url ./",
+    "test-nav": "rm -rf dist/* && parcel ./test/navigator/test_navigator.html"
   },
   "repository": {
     "type": "git",
