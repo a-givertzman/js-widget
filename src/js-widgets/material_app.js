@@ -65,7 +65,13 @@ export class MaterialApp {
         document.title = this.#title;
     }
     run() {
+        log(this.#debug, '[MaterialApp.run]');
+        document.addEventListener('load', (event) => { 
+            log(this.#debug, '[MaterialApp.run] document on load event');
+            // this.build();
+        });
         window.addEventListener('load', (event) => { 
+            log(this.#debug, '[MaterialApp.run] window on load event');
             this.build();
         });
     }        

@@ -23,43 +23,40 @@
  * SOFTWARE.
  */
 
-import { Widget } from "./widget.js";
-
 /**
- * Создает пустое пространство заданного размера
+ * Строит виджет по навым евентам из стрим-контроллера
  *
- * @param {Widget} child виджет, который будет внутри
+ * @param {string} data текст выводимый виджетом в DOM
  */
-export class SizedBox {
-    #child;
-    #width;
-    #height;
+export class StreamBuilder {
+    #debug = true;
     #widget;
-    constructor({child, width, height}={}) {
-        this.#child = child;
-        this.#width = width;
-        this.#height = height;
-        this.#widget = new Widget({
-            child: this.#child,
-            cssClass: [
-                'sized-box-widget',
-            ]
-        });
+    #streamController;
+    #builder;
+    constructor({
+        streamController,
+        builder,
+    }={}) {
+        this.#streamController = streamController;
+        this.#builder = builder;
+        // this.#widget = new Widget({
+        //     // tagName: 'p',
+        //     cssClass: ['text-widget']
+        // });
     }
     build() {
-        // if (this.child) {
-        //     this.child.build();
-        //     this.widget.htmlElement.appendChild(this.child.element);
-        // }
-        const el = this.#widget.build().htmlElement;
-        el.style.width = this.#width ? `${this.#width}px` : '';
-        el.style.height = this.#height ? `${this.#height}px` : '';
-        el.style.maxWidth = this.#width ? `${this.#width}px` : '';
-        el.style.maxHeight = this.#height ? `${this.#height}px` : '';
-        // el.style.backgroundColor = 'transparent';
+        this.#widget = this.#builder({snapshot: {}});
+        const element = this.#widget.build().htmlElement;
+        // element.innerHTML = this.#data;
+        this.#streamController.listen((event) => {
+            log(this.#debug, '[StreamBuilder.build] event:', event);
+            const widget = this.#builder({snapshot: event}).build();
+            this.htmlElement.innerHTML = widget.htmlElement.innerHTML;
+        });
         return this;
     }
     get htmlElement() {
         return this.#widget.htmlElement;
     }
+
 }
