@@ -24,6 +24,7 @@
  */
 
 import { Widget } from "./widget.js";
+import { ThemeData } from "./theme_data.js";
 
 /**
  * Создает объект приложение
@@ -46,7 +47,7 @@ export class MaterialApp {
         home,
         routes,
         initialRoute,
-        theme,
+        theme = new ThemeData(),
         darkTheme,
         builder,
     }={}) {

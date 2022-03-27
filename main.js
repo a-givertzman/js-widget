@@ -23,6 +23,8 @@
  * SOFTWARE.
  */
 import { MaterialApp } from "js-widget/material_app.js";
+import { ThemeData } from "./src/lib/theme_data.js";
+import { appFontFamily } from "./test/navigator/presentation/app_styles.js";
 import { HomePage } from "./test/navigator/presentation/home_page.js";
 
 /**
@@ -44,6 +46,9 @@ class App {
                             log(this.#debug, '[App.HomePage.onNavigate] result: ', result);
                         });
                 },
+            }),
+            theme: new ThemeData({
+                primaryFontFamily: appFontFamily,
             }),
             routes: [
                 // new MaterialRoute({
