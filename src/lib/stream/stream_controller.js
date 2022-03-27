@@ -35,10 +35,13 @@ import { StreamSubscription } from "./stream_subscription.js";
  */
 export class StreamController {
     #debug = false;
+    #onListen;
     #stream;
     #listeners = [];
     constructor({
+        onListen,
     }={}) {
+        this.#onListen = onListen;
         this.#stream = new DataStream({
             source: this,
         });
@@ -53,6 +56,9 @@ export class StreamController {
         this.#listeners.push(
             streamSubscription,
         );
+        if (this.#onListen) {
+            this.#onListen();
+        }
         log(this.#debug, `[StreamController.listen] new listner: `, streamSubscription);
     }
     add(event) {
@@ -79,6 +85,7 @@ export class StreamController {
                 listener.onDone();
             }
         });
+        this.#listeners = [];
     }
     get stream() {
         return this.#stream;

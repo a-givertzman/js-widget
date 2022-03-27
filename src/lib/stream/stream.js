@@ -34,18 +34,27 @@ import { StreamSubscription } from "./stream_subscription.js";
 export class DataStream {
     #debug = false;
     #source;
+    #test;
     #subscribed = false;
     #listeners = [];
     constructor({
         source = source,
+        test,
     }={}) {
         this.#source = source;
+        this.#test = test;
     }
     #onData(event) {
         log(this.#debug, `[DataStream.onData] event: `, event);
         this.#listeners.forEach(listener => {
             if (listener.onData) {
-                listener.onData(event);
+                if (this.#test) {
+                    if (this.#test(event)) {
+                        listener.onData(event);
+                    }
+                } else {
+                    listener.onData(event);
+                }
             }
         });
     }
@@ -55,6 +64,7 @@ export class DataStream {
                 listener.onDone();
             }
         });
+        this.#listeners = [];
     }
     #onError(error) {
         this.#listeners.forEach(listener => {
@@ -84,5 +94,11 @@ export class DataStream {
             streamSubscription,
         );
         log(this.#debug, `[DataStream.listen] new listner: `, streamSubscription);
+    }
+    where(test) {
+        return new DataStream({
+            source: this,
+            test: test,
+        })
     }
 }

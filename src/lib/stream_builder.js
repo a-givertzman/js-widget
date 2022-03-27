@@ -31,13 +31,13 @@
 export class StreamBuilder {
     #debug = true;
     #widget;
-    #streamController;
+    #stream;
     #builder;
     constructor({
-        streamController,
+        stream,
         builder,
     }={}) {
-        this.#streamController = streamController;
+        this.#stream = stream;
         this.#builder = builder;
         // this.#widget = new Widget({
         //     // tagName: 'p',
@@ -48,7 +48,8 @@ export class StreamBuilder {
         this.#widget = this.#builder({snapshot: {}});
         const element = this.#widget.build().htmlElement;
         // element.innerHTML = this.#data;
-        this.#streamController.listen((event) => {
+        log(this.#debug, '[StreamBuilder.build] stream:', this.#stream);
+        this.#stream.listen((event) => {
             log(this.#debug, '[StreamBuilder.build] event:', event);
             const widget = this.#builder({snapshot: event}).build();
             this.htmlElement.innerHTML = widget.htmlElement.innerHTML;

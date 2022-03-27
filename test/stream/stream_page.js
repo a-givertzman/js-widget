@@ -57,11 +57,20 @@ export class StreamPage {
             reconnectDelay: 1500,
             reconnectCount: 5,
         });
-        const streanDataSourceFilteredArea1 = new StreamDataSourceFiltered({
-            streamDataSource: this.#streamDataSource,
+        const streamFilteredArea1 = this.#streamDataSource.stream.where(event => {
+            return event.area == 'area1';
         });
-        const streanDataSourceFilteredArea2 = new StreamDataSourceFiltered({
-            streamDataSource: this.#streamDataSource,
+        const streamFilteredArea2 = this.#streamDataSource.stream.where(event => {
+            return event.area == 'area2';
+        });
+        const streamFilteredArea3 = this.#streamDataSource.stream.where(event => {
+            return event.area == 'area3';
+        });
+        const streamFilteredArea4 = this.#streamDataSource.stream.where(event => {
+            return event.area == 'area4';
+        });
+        const streamFilteredConnection = this.#streamDataSource.stream.where(event => {
+            return event.type == 'polling';
         });
         this.navigateTo = onNavigate;
         this.#widget = new Scaffold({
@@ -116,30 +125,50 @@ export class StreamPage {
                                                 },
                                             }),
                                             new StreamBuilder({
-                                                streamController: this.#streamDataSource,
+                                                stream: streamFilteredArea1,
                                                 builder: ({snapshot}={}) => {
-                                                    const value = snapshot.value;
-                                                    return new TextWidget(Number.parseFloat(value).toFixed(5), {
+                                                    const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
+                                                    return new TextWidget(value, {
                                                         style: {...menuHeaderTextStyle, ...{fontSize: 16}},
                                                     });
                                                 }
                                             }),
                                             new SizedBox({height: 10}),
                                             new StreamBuilder({
-                                                streamController: this.#streamDataSource,
+                                                stream: streamFilteredArea2,
                                                 builder: ({snapshot}={}) => {
-                                                    const value = snapshot.value;
-                                                    return new TextWidget(Number.parseFloat(value).toFixed(5), {
+                                                    const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
+                                                    return new TextWidget(value, {
                                                         style: {...menuHeaderTextStyle, ...{fontSize: 16}},
                                                     });
                                                 }
                                             }),
                                             new SizedBox({height: 10}),
                                             new StreamBuilder({
-                                                streamController: this.#streamDataSource,
+                                                stream: streamFilteredArea3,
                                                 builder: ({snapshot}={}) => {
-                                                    const value = snapshot.value;
-                                                    return new TextWidget('connected: ' + Number.parseFloat(value).toFixed(5), {
+                                                    const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
+                                                    return new TextWidget(value, {
+                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                    });
+                                                }
+                                            }),
+                                            new SizedBox({height: 10}),
+                                            new StreamBuilder({
+                                                stream: streamFilteredArea4,
+                                                builder: ({snapshot}={}) => {
+                                                    const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
+                                                    return new TextWidget(value, {
+                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                    });
+                                                }
+                                            }),
+                                            new SizedBox({height: 10}),
+                                            new StreamBuilder({
+                                                stream: streamFilteredConnection,
+                                                builder: ({snapshot}={}) => {
+                                                    const value = `${snapshot.type} ${snapshot.value} ${snapshot.timestamp}`;
+                                                    return new TextWidget('connected: ' + value, {
                                                         style: {...menuHeaderTextStyle, ...{fontSize: 16}},
                                                     });
                                                 }
@@ -224,13 +253,13 @@ export class StreamPage {
 
 class StreamDataSourceFiltered {
     #debug = true;
-    #streamDataSource;
+    #stream;
     #suscribed = false;
     #listeners = [];
     constructor({
-        streamDataSource,
+        stream,
     }={}) {
-        this.#streamDataSource = streamDataSource;
+        this.#stream = stream;
     }
     listen(callback, filter = {key: '', value: ''}) {
         log(this.#debug, '[StreamDataSourceFiltered.listen] callback: ', callback);
@@ -239,7 +268,7 @@ class StreamDataSourceFiltered {
             filter: filter,
         });
         if (!this.#suscribed) {
-            this.#streamDataSource.listen(this.#onEvent);
+            this.#stream.listen(this.#onEvent);
         }
     }
     #onEvent(event) {

@@ -51,7 +51,14 @@ export class StreamDataSource {
         this.#port = port;
         this.#reconnectDelay = reconnectDelay;
         this.#reconnectCount = reconnectCount;
-        this.#streamController = new StreamController();
+        this.#streamController = new StreamController({
+            onListen: () => {
+                this.#listen();
+            }
+        });
+    }
+    get stream() {
+        return this.#streamController.stream;
     }
     send(data) {
         if (this.#connected && data) {
@@ -63,10 +70,10 @@ export class StreamDataSource {
             throw Error('[StreamDataSource.send] Невозможно отправить данные, нет подключения');
         }
     }
-    listen(callback) {
-        log(this.#debug, '[StreamDataSource.listen] callback: ', callback);
+    #listen(onData, {onError, onDone}={}) {
+        log(this.#debug, '[StreamDataSource.listen] callback: ', onData);
         this.#reconnect(this.#ip, this.#port);
-        this.#streamController.listen(callback);
+        // this.#streamController.listen(onData, {onError, onDone});
     }
     #tryConnect(ip, port) {
         try {
@@ -134,6 +141,7 @@ export class StreamDataSource {
         connection.onerror = async (event) => {
             log(this.#debug, '[StreamDataSource.handleConnection] onerror: ', event);
             this.#connected = false;
+            this.#streamController.addError(event);
             this.#reconnect(this.#ip, this.#port);
         }        
     }

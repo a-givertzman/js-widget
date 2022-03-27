@@ -37,12 +37,12 @@ describe('Stream', () => {
         expect(streamController).toBeInstanceOf(StreamController);
         expect(stream).toBeInstanceOf(DataStream);
     });
-    it('add integer', () => {
+    it('add(Integer)', () => {
         const streamController = new StreamController();
         const stream = streamController.stream;
         var index = 0;
         stream.listen(event => {
-            log(_debug, '[Test.Stream.add] event: ', event);
+            log(_debug, '[Test.Stream.add(Integer)] event: ', event);
             expect(event).toBeInstanceOf(Number);
             expect(event).toEqual(index);
             index++;
@@ -50,16 +50,16 @@ describe('Stream', () => {
         expect(streamController).toBeInstanceOf(StreamController);
         expect(stream).toBeInstanceOf(DataStream);
         for(var i = 0; i < 10; i++) {
-            log(_debug, '[Test.Stream.add] int: ', i);
+            // log(_debug, '[Test.Stream.add(Integer)] int: ', i);
             streamController.add(i);
         }
     });
-    it('add object', () => {
+    it('add(Object)', () => {
         const streamController = new StreamController();
         const stream = streamController.stream;
         var index = 0;
         stream.listen(event => {
-            log(_debug, '[Test.Stream.create] event: ', event);
+            log(_debug, '[Test.Stream.add(Object)] event: ', event);
             expect(event).toBeInstanceOf(Object);
             expect(event).toEqual({param: index});
             index++;
@@ -69,23 +69,24 @@ describe('Stream', () => {
         for(var i = 0; i < 10; i++) {
             streamController.add({param: i});
         }
+        streamController.close();
     });
-    it('error event', () => {
+    it('onError', () => {
         const streamController = new StreamController();
         const stream = streamController.stream;
         var index = 0;
         stream.listen(
             (event) => {
-                log(_debug, '[Test.Stream.create] event: ', event);
+                log(_debug, '[Test.Stream.onError] event: ', event);
                 expect(event).toBeInstanceOf(Object);
                 expect(event).toEqual({param: index});
                 index++;
             }, {
             onDone: () => {
-                log(_debug, '[Test.Stream.onDone] emitted');
+                log(_debug, '[Test.Stream.onError] done emitted');
             },
             onError: (error) => {
-                log(_debug, '[Test.Stream.onError] event: ', error);
+                log(_debug, '[Test.Stream.onError] error: ', error);
             },
         });
         expect(streamController).toBeInstanceOf(StreamController);
@@ -97,27 +98,25 @@ describe('Stream', () => {
                     new Error('test stream error'),
                 );
             }
-            if (i == 6) {
-                streamController.close();
-            }
         }
+        streamController.close();
     });
-    it('done event', () => {
+    it('onDone', () => {
         const streamController = new StreamController();
         const stream = streamController.stream;
         var index = 0;
         stream.listen(
             (event) => {
-                log(_debug, '[Test.Stream.create] event: ', event);
+                log(_debug, '[Test.Stream.onDone] event: ', event);
                 expect(event).toBeInstanceOf(Object);
                 expect(event).toEqual({param: index});
                 index++;
             }, {
             onDone: () => {
-                log(_debug, '[Test.Stream.onDone] emitted');
+                log(_debug, '[Test.Stream.onDone] done emitted');
             },
             onError: (error) => {
-                log(_debug, '[Test.Stream.onError] event: ', error);
+                log(_debug, '[Test.Stream.onDone] error: ', error);
             },
         });
         expect(streamController).toBeInstanceOf(StreamController);
