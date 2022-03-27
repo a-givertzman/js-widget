@@ -1,4 +1,5 @@
 "use strict";
+
 /**
  * The MIT License (MIT)
  * 
@@ -23,19 +24,65 @@
  * SOFTWARE.
  */
 
-/**
+import { StreamSubscription } from "./stream_subscription.js";
+
+ /**
  * Источник асинхронных событий
  * можно подписаться на события методом listen(callback) передав callback.
  * Подписчиков может быть несколько
  */
 export class DataStream {
+    #debug = false;
+    #source;
+    #subscribed = false;
+    #listeners = [];
     constructor({
-        listen
+        source = source,
     }={}) {
-        
+        this.#source = source;
     }
-    listen(callback) {
-        log(this.#debug, `[StreamController.listen] new listner: ${callback}`);
-        this.#listeners.push(callback);
+    #onData(event) {
+        log(this.#debug, `[DataStream.onData] event: `, event);
+        this.#listeners.forEach(listener => {
+            if (listener.onData) {
+                listener.onData(event);
+            }
+        });
+    }
+    #onDone() {
+        this.#listeners.forEach(listener => {
+            if (listener.onDone) {
+                listener.onDone();
+            }
+        });
+    }
+    #onError(error) {
+        this.#listeners.forEach(listener => {
+            if (listener.onError) {
+                listener.onError(error);
+            }
+        });
+    }
+    listen(onData, {onError, onDone, cancelOnError}={}) {
+        const self = this;
+        if (!self.#subscribed) {
+            log(self.#debug, `[DataStream.listen] source subscription`);
+            self.#subscribed = true;
+            self.#source.listen(
+                event => self.#onData(event), {
+                onDone: () => self.#onDone(),
+                onError: (error) => self.#onError(error),
+            });
+        }
+        const streamSubscription = new StreamSubscription({
+            onData: onData,
+            onDone: onDone,
+            onError: onError,
+            cancelOnError: cancelOnError,
+        });
+        this.#listeners.push(
+            streamSubscription,
+        );
+        log(this.#debug, `[DataStream.listen] new listner: `, streamSubscription);
     }
 }

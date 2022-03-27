@@ -1,4 +1,5 @@
 "use strict";
+
 /**
  * The MIT License (MIT)
  * 
@@ -23,7 +24,10 @@
  * SOFTWARE.
  */
 
-/**
+import { DataStream } from "./stream.js";
+import { StreamSubscription } from "./stream_subscription.js";
+
+ /**
  * Класс реализует поток данных
  * можно подписаться на данные методом listen() передав callback.
  * Подписчиков может быть несколько
@@ -31,19 +35,52 @@
  */
 export class StreamController {
     #debug = false;
+    #stream;
     #listeners = [];
     constructor({
     }={}) {
-        
+        this.#stream = new DataStream({
+            source: this,
+        });
     }
-    listen(callback) {
-        log(this.#debug, `[StreamController.listen] new listner: ${callback}`);
-        this.#listeners.push(callback);
+    listen(onData, {onError, onDone, cancelOnError}={}) {
+        const streamSubscription = new StreamSubscription({
+            onData: onData,
+            onDone: onDone,
+            onError: onError,
+            cancelOnError: cancelOnError,
+        });
+        this.#listeners.push(
+            streamSubscription,
+        );
+        log(this.#debug, `[StreamController.listen] new listner: `, streamSubscription);
     }
     add(event) {
+        log(this.#debug, `[StreamController.add] listeners`, this.#listeners);
         this.#listeners.forEach(listener => {
-            // log(this.#debug, `[StreamController.add] sending event ${event} to listenr ${listener}`);
-            listener(event);
+            log(this.#debug, `[StreamController.add] sending event`, event, ' to listenr ', listener);
+            if (listener.onData) {
+                listener.onData(event);
+            }
         });
+    }
+    addError(event) {
+        this.#listeners.forEach(listener => {
+            // log(this.#debug, `[StreamController.addError] sending event ${event} to listenr ${listener}`);
+            if (listener.onError) {
+                listener.onError(event);
+            }
+        });
+    }
+    close() {
+        this.#listeners.forEach(listener => {
+            // log(this.#debug, `[StreamController.close] sending event ${event} to listenr ${listener}`);
+            if (listener.onDone) {
+                listener.onDone();
+            }
+        });
+    }
+    get stream() {
+        return this.#stream;
     }
 }
