@@ -196,8 +196,8 @@ body {
 } */
 .single-child-scroll-vertial-widget > ul > *,
 .single-child-scroll-horizontal-widget > ul > * {
-    flex-grow: 1;
-    flex-shrink: 0;
+    flex-grow: 0;
+    flex-shrink: 1;
     flex-basis: content;
 }
 

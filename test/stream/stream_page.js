@@ -42,6 +42,9 @@ import { MaterialRoute } from "js-widget/material_route.js";
 import { Expanded } from "js-widget/expanded.js";
 import { StreamBuilder } from "js-widget/stream_builder.js";
 import { StreamDataSource } from "js-widget/stream/stream_data_source.js";
+import { CustomPaint } from "../../src/lib/custom_paint.js";
+import { Size } from "../../src/lib/size.js";
+import { SingleChildScrollView } from "../../src/lib/single_child_scroll_view.js";
 
 export class StreamPage {
     #debug = true;
@@ -108,129 +111,176 @@ export class StreamPage {
                             child: new Center({
                                 child: new Container({
                                     width: 200,
-                                    child: new Column({
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        children: [
-                                            new TextButton({
-                                                child: new TextWidget('Send test message', {
-                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                    child: new SingleChildScrollView({
+                                        child: new Column({
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                                            children: [
+                                                new TextButton({
+                                                    child: new TextWidget('Send test message', {
+                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                    }),
+                                                    onPressed: (e) => {
+                                                        this.#streamDataSource.send({
+                                                            type: 'message', 
+                                                            area: 'area1',
+                                                            data: 'test message',
+                                                        });
+                                                    },
                                                 }),
-                                                onPressed: (e) => {
-                                                    this.#streamDataSource.send({
-                                                        type: 'message', 
-                                                        area: 'area1',
-                                                        data: 'test message',
-                                                    });
-                                                },
-                                            }),
-                                            new StreamBuilder({
-                                                stream: streamFilteredArea1,
-                                                builder: ({snapshot}={}) => {
-                                                    const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
-                                                    return new TextWidget(value, {
-                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
-                                                    });
-                                                }
-                                            }),
-                                            new SizedBox({height: 10}),
-                                            new StreamBuilder({
-                                                stream: streamFilteredArea2,
-                                                builder: ({snapshot}={}) => {
-                                                    const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
-                                                    return new TextWidget(value, {
-                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
-                                                    });
-                                                }
-                                            }),
-                                            new SizedBox({height: 10}),
-                                            new StreamBuilder({
-                                                stream: streamFilteredArea3,
-                                                builder: ({snapshot}={}) => {
-                                                    const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
-                                                    return new TextWidget(value, {
-                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
-                                                    });
-                                                }
-                                            }),
-                                            new SizedBox({height: 10}),
-                                            new StreamBuilder({
-                                                stream: streamFilteredArea4,
-                                                builder: ({snapshot}={}) => {
-                                                    const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
-                                                    return new TextWidget(value, {
-                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
-                                                    });
-                                                }
-                                            }),
-                                            new SizedBox({height: 10}),
-                                            new StreamBuilder({
-                                                stream: streamFilteredConnection,
-                                                builder: ({snapshot}={}) => {
-                                                    const value = `${snapshot.type} ${snapshot.value} ${snapshot.timestamp}`;
-                                                    return new TextWidget('connected: ' + value, {
-                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
-                                                    });
-                                                }
-                                            }),
-                                            new SizedBox({height: 10}),
-                                            new TextButton({
-                                                child: new TextWidget('Second page', {
-                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
-                                                }),
-                                                onPressed: (e) => {
-                                                    this.navigateTo(
-                                                        new MaterialRoute({
-                                                            path: '/secondPage',
-                                                            widget: new SecondPage({}),
+                                                new Row({
+                                                    crossAxisAlignment: CrossAxisAlignment.Center,
+                                                    children: [
+                                                        new CustomPaint({
+                                                            size: new Size(200, 100),
+                                                            stream: streamFilteredArea1,
+                                                            // style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                        }),                                                        new SizedBox({width: 10}),
+                                                        new StreamBuilder({
+                                                            stream: streamFilteredArea1,
+                                                            builder: ({snapshot}={}) => {
+                                                                const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
+                                                                return new TextWidget(value, {
+                                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                                });
+                                                            }
                                                         }),
-                                                    );
-                                                },
-                                            }),
-                                            new SizedBox({height: 10}),
-                                            new TextButton({
-                                                child: new TextWidget('Third Page', {
-                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+
+                                                    ],
                                                 }),
-                                                onPressed: (e) => {
-                                                    this.navigateTo(
-                                                        new MaterialRoute({
-                                                            path: '/thirdPage',
-                                                            widget: new ThirdPage({}),
+                                                new SizedBox({height: 20}),
+                                                new Row({
+                                                    crossAxisAlignment: CrossAxisAlignment.Center,
+                                                    children: [
+                                                        new CustomPaint({
+                                                            size: new Size(200, 100),
+                                                            stream: streamFilteredArea2,
+                                                            // style: {...menuHeaderTextStyle, ...{fontSize: 16}},
                                                         }),
-                                                    );
-                                                },
-                                            }),
-                                            new SizedBox({height: 10,}),
-                                            new TextButton({
-                                                child: new TextWidget('Test Input Page', {
-                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16,},},
+                                                        new SizedBox({width: 10}),
+                                                        new StreamBuilder({
+                                                            stream: streamFilteredArea2,
+                                                            builder: ({snapshot}={}) => {
+                                                                const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
+                                                                return new TextWidget(value, {
+                                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                                });
+                                                            }
+                                                        }),
+                                                    ],
                                                 }),
-                                                onPressed: (e) => {
-                                                    this.navigateTo(
-                                                        new MaterialRoute({
-                                                            path: '/TestInputPage',
-                                                            widget: new TestInputPage({}),
+                                                new SizedBox({height: 20}),
+                                                new Row({
+                                                    crossAxisAlignment: CrossAxisAlignment.Center,
+                                                    children: [
+                                                        new CustomPaint({
+                                                            size: new Size(200, 100),
+                                                            stream: streamFilteredArea3,
+                                                            // style: {...menuHeaderTextStyle, ...{fontSize: 16}},
                                                         }),
-                                                    );
-                                                },
-                                            }),
-                                            new SizedBox({height: 10,}),
-                                            new TextButton({
-                                                child: new TextWidget('Search Field Page', {
-                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16,},},
+                                                        new SizedBox({width: 10}),
+                                                        new StreamBuilder({
+                                                            stream: streamFilteredArea3,
+                                                            builder: ({snapshot}={}) => {
+                                                                const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
+                                                                return new TextWidget(value, {
+                                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                                });
+                                                            }
+                                                        }),
+                                                    ],
                                                 }),
-                                                onPressed: (e) => {
-                                                    this.navigateTo(
-                                                        new MaterialRoute({
-                                                            path: '/SearchFieldPage',
-                                                            widget: new SearcchFieldPage({}),
+                                                new SizedBox({height: 20}),
+                                                new Row({
+                                                    crossAxisAlignment: CrossAxisAlignment.Center,
+                                                    children: [
+                                                        new CustomPaint({
+                                                            size: new Size(200, 100),
+                                                            stream: streamFilteredArea4,
+                                                            // style: {...menuHeaderTextStyle, ...{fontSize: 16}},
                                                         }),
-                                                    );
-                                                },
-                                            }),
-                                        ],
+                                                        new SizedBox({width: 10}),
+                                                        new StreamBuilder({
+                                                            stream: streamFilteredArea4,
+                                                            builder: ({snapshot}={}) => {
+                                                                const value = `${Number.parseFloat(snapshot.value).toFixed(5)} [${snapshot.area}]`;
+                                                                return new TextWidget(value, {
+                                                                    style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                                });
+                                                            }
+                                                        }),
+                                                    ],
+                                                }),
+                                                new SizedBox({height: 20}),
+                                                new StreamBuilder({
+                                                    stream: streamFilteredConnection,
+                                                    builder: ({snapshot}={}) => {
+                                                        const value = `${snapshot.type} ${snapshot.value} ${snapshot.timestamp}`;
+                                                        return new TextWidget('connected: ' + value, {
+                                                            style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                        });
+                                                    }
+                                                }),
+                                                new SizedBox({height: 10}),
+                                                new TextButton({
+                                                    child: new TextWidget('Second page', {
+                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                    }),
+                                                    onPressed: (e) => {
+                                                        this.navigateTo(
+                                                            new MaterialRoute({
+                                                                path: '/secondPage',
+                                                                widget: new SecondPage({}),
+                                                            }),
+                                                        );
+                                                    },
+                                                }),
+                                                new SizedBox({height: 10}),
+                                                new TextButton({
+                                                    child: new TextWidget('Third Page', {
+                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16}},
+                                                    }),
+                                                    onPressed: (e) => {
+                                                        this.navigateTo(
+                                                            new MaterialRoute({
+                                                                path: '/thirdPage',
+                                                                widget: new ThirdPage({}),
+                                                            }),
+                                                        );
+                                                    },
+                                                }),
+                                                new SizedBox({height: 10,}),
+                                                new TextButton({
+                                                    child: new TextWidget('Test Input Page', {
+                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16,},},
+                                                    }),
+                                                    onPressed: (e) => {
+                                                        this.navigateTo(
+                                                            new MaterialRoute({
+                                                                path: '/TestInputPage',
+                                                                widget: new TestInputPage({}),
+                                                            }),
+                                                        );
+                                                    },
+                                                }),
+                                                new SizedBox({height: 10,}),
+                                                new TextButton({
+                                                    child: new TextWidget('Search Field Page', {
+                                                        style: {...menuHeaderTextStyle, ...{fontSize: 16,},},
+                                                    }),
+                                                    onPressed: (e) => {
+                                                        this.navigateTo(
+                                                            new MaterialRoute({
+                                                                path: '/SearchFieldPage',
+                                                                widget: new SearcchFieldPage({}),
+                                                            }),
+                                                        );
+                                                    },
+                                                }),
+                                            ],
+                                        }),
                                     }),
+                                    
                                 }),
                             }),
                         }),
