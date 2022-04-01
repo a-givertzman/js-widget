@@ -33,9 +33,17 @@ export class EdgeInsets {
     #left;
     /**
      * Создает отступ со всех сторон 
-     * @param {Number} value
+     * @param {Number} top
+     * @param {Number} right
+     * @param {Number} bottom
+     * @param {Number} left
      */
-     constructor({top = 0, right = 0, bottom = 0, left = 0}={}) {
+    constructor({
+        top = 0, 
+        right = 0, 
+        bottom = 0, 
+        left = 0,
+    }={}) {
         this.#top = top;
         this.#right = right;
         this.#bottom = bottom;

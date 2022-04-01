@@ -22,33 +22,98 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 /**
- * Бордюр элемента
- *
+ * Сторона линии границы элемента
  */
-export class Border {
+ export class BorderSide {
     #color;
     #width;
-    #radius;
-    constructor({color, width, radius}={}) {
+    constructor({color = 'transparent', width = 0}={}) {
         this.#color = color;
         this.#width = width;
-        this.#radius = radius;
     }
-    static all({color = 'transparent', width = 0}={}) {
-        return new Border({
-            color: color,
-            width: width,
-            radius: 0,
+    build() {
+        return `${this.#width}px solid ${this.#color};`;
+    }
+}
+
+export class BorderRadius {
+    #topLeft;
+    #topRight;
+    #bottomLeft;
+    #bottomRight;
+    constructor({
+        topLeft,
+        topRight,
+        bottomLeft,
+        bottomRight,
+    }={}) {
+        this.#topLeft = topLeft;
+        this.#topRight = topRight;
+        this.#bottomLeft = bottomLeft;
+        this.#bottomRight = bottomRight;
+    }
+    static all(radius) {
+        return new BorderRadius({
+            topLeft: radius,
+            topRight: radius,
+            bottomLeft: radius,
+            bottomRight: radius,
         });
     }
     build() {
         return {
-            top: `${this.#width}px solid ${this.#color}`,
-            right: `${this.#width}px solid ${this.#color}`,
-            bottom: `${this.#width}px solid ${this.#color}`,
-            left: `${this.#width}px solid ${this.#color}`,
-            radius: `${this.#radius}px`,
+            topLeft: `${this.#topLeft}px`,
+            topRight: `${this.#topRight}px`,
+            bottomRight: `${this.#bottomRight}px`,
+            bottomLeft: `${this.#bottomLeft}px`,
+        }
+    }
+}
+
+/**
+ * Линия границы элемента
+ */
+export class Border {
+    #top;
+    #right;
+    #bottom;
+    #left;
+    #radius;
+    constructor({
+        top,
+        right,
+        bottom,
+        left,
+        radius,
+    }={}) {
+        this.#top = top;
+        this.#right = right;
+        this.#bottom = bottom;
+        this.#left = left;
+        this.#radius = radius;
+    }
+    static all({
+        color = 'transparent', 
+        width = 0, 
+        radius = BorderRadius.all(0),
+    }={}) {
+        return new Border({
+            top: new BorderSide({color: color, width: width}),
+            right: new BorderSide({color: color, width: width}),
+            bottom: new BorderSide({color: color, width: width}),
+            left: new BorderSide({color: color, width: width}),
+            radius: radius,
+        });
+    }
+    build() {
+        return {
+            top: this.#top ? this.#top.build() : '',
+            right: this.#right ? this.#right.build() : '',
+            bottom: this.#bottom ? this.#bottom.build() : '',
+            left: this.#left ? this.#left.build() : '',
+            radius: this.#radius ? this.#radius.build() : '',
         };
     }
 }

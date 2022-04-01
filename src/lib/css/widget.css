@@ -1,32 +1,50 @@
 /* Паддинги и бордеры всех элементов не изменяют размер элемента */
 *{
+    display: flex;
+    flex: 0 1 auto;
+    align-items: flex-start;
+    justify-content: flex-start;
     outline: none;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: inherit;
-    flex-shrink: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 html,
 body {
-    display: flex;
+    position: absolute;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
+    /* overflow: auto; */
+}
+
+.center-widget {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    /* flex: 1 0 auto; */
+    /* overflow: auto; */
+    /* width: 100%; */
+    /* height: 100%; */
+    /* flex-direction: column; */
 }
 
 .container-widget {
     display: flex;
-    flex: 1 0;
+    overflow: hidden;
+    /* flex: 0 0 auto; */
 }
 .sized-box-widget,
 .material-app-widget,
 .scaffold-widget {
-    overflow: auto;
+    overflow: hidden;
+    /* overflow: auto; */
     display: flex;
-    flex: 1 0 auto;
+    /* flex: 0 0 auto; */
 }
 .scaffold-widget {
     position: absolute;
@@ -34,6 +52,7 @@ body {
     height: 100%;
 }
 .sized-box-widget {
+    flex-shrink: 0;
     /* max-width: min-content; */
     /* max-height: min-content; */
 }
@@ -72,27 +91,16 @@ body {
     animation: 0.2s ease-out 0s 1 slideOutToRight;
 }
 
-.center-widget {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1 0;
-    /* overflow: auto; */
-    /* width: 100%; */
-    /* height: 100%; */
-    /* flex-direction: column; */
-}
-
 .column-widget {
     display: flex;
     flex-basis: auto;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1 0;
+    flex: 1 1 auto;
     /* overflow: auto; */
-    /* width: 100%;
-    height: 100%; */
+    /* width: 100%; */
+    height: 100%;
 }
 
 .row-widget {
@@ -101,10 +109,10 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    flex: 1 0;
+    flex: 1 1 auto;
     /* overflow: auto; */
-    /* width: 100%;
-    height: 100%; */
+    width: 100%;
+    /* height: 100%; */
 }
 
 .list-view-widget {
@@ -115,7 +123,7 @@ body {
     align-items: center;
     margin: 0;
     padding: 0;
-    flex: 1 0;
+    flex: 1 0 auto;
     /* height: 100%;
     width: 100%; */
     /* overflow-x: auto; */
@@ -144,7 +152,7 @@ body {
     font-weight: normal;
     border-style: none;
     /* height: 40px; */
-    overflow: hidden;
+    /* overflow: hidden; */
     text-overflow: ellipsis;
 }
 
@@ -183,27 +191,30 @@ body {
     display: flex;
     flex: 0 0 auto;
 }
+.single-child-scroll-vertial-widget {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+}
+.single-child-scroll-horizontal-widget {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+}
 .single-child-scroll-vertial-widget,
 .single-child-scroll-horizontal-widget {
+    overflow: auto;
     display: flex;
-    flex: 1 0 auto;
-    /* width: 100%;
-    height: 100%; */
+    flex: 0 1 auto;
 }
-/* .single-child-scroll-vertial-widget > *,
+.single-child-scroll-vertial-widget > *,
 .single-child-scroll-horizontal-widget > * {
-    flex: 1 0 100%;
-} */
-.single-child-scroll-vertial-widget > ul > *,
-.single-child-scroll-horizontal-widget > ul > * {
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: content;
-}
-
-.single-child-scroll-vertial-widget {
-    overflow-y: scroll;
-}
-.single-child-scroll-horizontal-widget {
-    overflow-x: scroll;
+    display: flex;
+    flex-shrink: 0;
 }

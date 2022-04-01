@@ -72,6 +72,12 @@ export class SingleChildScrollView {
         this.#physics = physics;
         this.#widget = new Widget({
             child: this.#child,
+            // new Widget({
+            //     child: this.#child,
+            //         cssClass: [
+            //             this.#direction == Axis.vertical ? 'single-child-scroll-vertial-widget-content' : 'single-child-scroll-horizontal-widget-content',
+            //         ]
+            //     }),
             cssClass: [
                 this.#direction == Axis.vertical ? 'single-child-scroll-vertial-widget' : 'single-child-scroll-horizontal-widget',
             ]

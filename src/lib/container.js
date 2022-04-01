@@ -26,6 +26,7 @@
 import { Widget } from "./widget.js";
 import { Border } from "./border.js";
 import { EdgeInsets } from "./edge_insets.js";
+import { CrossAxisAlignment, MainAxisAlignment } from "./alignment.js";
 
 /**
  * Виджет имеющий размеры, цвет фона отступы внешние и внутренние, контур
@@ -39,21 +40,24 @@ import { EdgeInsets } from "./edge_insets.js";
  * @param {Border} border контур
  */
 export class Container {
-    #debug = true;
+    #debug = false;
     #child;
     #widget;
     #width;
     #height;
     #color;
+    #margin;
     #padding;
     #border;
+    #alignment;
     constructor({
         child, 
         width, 
         height, 
         color, 
-        // margin, 
+        margin, 
         padding = EdgeInsets.all(0.0),
+        alignment,
         border = new Border({
             width: 0,
             color: 'transparent',
@@ -64,9 +68,10 @@ export class Container {
         this.#width = width;
         this.#height = height;
         this.#color = color;
+        this.#margin = margin;
         this.#padding = padding;
-        // this.margin = margin;
         this.#border = border;
+        this.#alignment = alignment;
         this.#widget = new Widget({
             child: this.#child,
             cssClass: [
@@ -79,20 +84,42 @@ export class Container {
         if (!element) {
             throw new Error(`[Container] error building child "${this.#widget.constructor.name}"`);
         }
+        if (this.#alignment) {
+            if (!this.#width) {
+                element.style.alignSelf = CrossAxisAlignment.stretch;
+            }
+            element.style.flexGrow = '1';
+            element.style.alignItems = this.#alignment.mainAxisAlignment;
+            element.style.justifyContent = this.#alignment.crossAxisAlignment;
+        }
         element.style.width = this.#width ? `${this.#width}px` : '';
         element.style.height = this.#height ? `${this.#height}px` : '';
         element.style.maxWidth = this.#width ? `${this.#width}px` : '';
         element.style.maxHeight = this.#height ? `${this.#height}px` : '';
         element.style.backgroundColor = this.#color ? this.#color : 'transparent';
-        const insets = this.#padding.build();
-        element.style.padding = insets 
-            ? `${insets.top} ${insets.right} ${insets.bottom} ${insets.left}` 
-            : '';
-        const border = this.#border.build();
-        element.style.borderTop = border ? `${border.top}` : '';
-        element.style.borderRight = border ? `${border.right}` : '';
-        element.style.borderBottom = border ? `${border.bottom}` : '';
-        element.style.borderLeft = border ? `${border.left}` : '';
+        if (this.#padding) {
+            const paddingInsets = this.#padding.build();
+            element.style.padding = paddingInsets 
+                ? `${paddingInsets.top} ${paddingInsets.right} ${paddingInsets.bottom} ${paddingInsets.left}` 
+                : '';
+        }
+        if (this.#margin) {
+            const marginInsets = this.#margin.build();
+            element.style.margin = marginInsets 
+                ? `${marginInsets.top} ${marginInsets.right} ${marginInsets.bottom} ${marginInsets.left}` 
+                : '';
+        }
+        if (this.#border) {
+            const border = this.#border.build();
+            element.style.borderTop = border ? `${border.top}` : '';
+            element.style.borderRight = border ? `${border.right}` : '';
+            element.style.borderBottom = border ? `${border.bottom}` : '';
+            element.style.borderLeft = border ? `${border.left}` : '';
+            element.style.borderTopLeftRadius = border.radius.topLeft;
+            element.style.borderTopRightRadius = border.radius.topRight;
+            element.style.borderBottomRightRadius = border.radius.bottomRight;
+            element.style.borderBottomLeftRadius = border.radius.bottomLeft;
+        }
         // log(this.#debug, '[Container.build] this: ', this);
         // log(this.#debug, '[Container.build] child: ', this.#child);
         log(this.#debug, '[Container.build] child: ', this.htmlElement);

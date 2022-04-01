@@ -30,7 +30,7 @@ import { Row } from "../../../src/lib/row.js";
 import { Column } from "../../../src/lib/column.js";
 import { Scaffold } from "../../../src/lib/scaffold.js";
 import { TextOverflow, TextWidget } from "../../../src/lib/text.js";
-import { CrossAxisAlignment, MainAxisAlignment } from "../../../src/lib/alignment.js";
+import { Alignment, CrossAxisAlignment, MainAxisAlignment } from "../../../src/lib/alignment.js";
 import { TextButton } from "../../../src/lib/text_button.js";
 import { Expanded } from "../../../src/lib/expanded.js";
 
@@ -45,7 +45,8 @@ export class FirstPage {
                         child: new Container({
                             color: '#5050ff',
                             height: 60,
-                            child: new Row({
+                                alignment: Alignment.center,
+                                child: new Row({
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                     new TextButton({

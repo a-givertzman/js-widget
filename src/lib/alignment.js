@@ -58,3 +58,42 @@ export const TextAlignVertical = {
     center: 'center',
     bottom: 'end',
 }
+
+export const Alignment = {
+    topLeft: {
+        mainAxisAlignment: MainAxisAlignment.start, 
+        crossAxisAlignment: CrossAxisAlignment.start,
+    },
+    topCenter: {
+        mainAxisAlignment: MainAxisAlignment.start, 
+        crossAxisAlignment: CrossAxisAlignment.center,
+    },
+    topRight: {
+        mainAxisAlignment: MainAxisAlignment.start, 
+        crossAxisAlignment: CrossAxisAlignment.end,
+    },
+    centerLeft: {
+        mainAxisAlignment: MainAxisAlignment.center, 
+        crossAxisAlignment: CrossAxisAlignment.start,
+    },
+    center: {
+        mainAxisAlignment: MainAxisAlignment.center, 
+        crossAxisAlignment: CrossAxisAlignment.center,
+    },
+    centerRight: {
+        mainAxisAlignment: MainAxisAlignment.center, 
+        crossAxisAlignment: CrossAxisAlignment.end,
+    },
+    bottomLeft: {
+        mainAxisAlignment: MainAxisAlignment.end, 
+        crossAxisAlignment: CrossAxisAlignment.start,
+    },
+    bottomCenter: {
+        mainAxisAlignment: MainAxisAlignment.end, 
+        crossAxisAlignment: CrossAxisAlignment.center,
+    },
+    bottomRight: {
+        mainAxisAlignment: MainAxisAlignment.end, 
+        crossAxisAlignment: CrossAxisAlignment.end,
+    },
+}

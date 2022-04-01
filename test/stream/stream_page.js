@@ -45,6 +45,7 @@ import { StreamDataSource } from "js-widget/stream/stream_data_source.js";
 import { CustomPaint } from "../../src/lib/custom_paint.js";
 import { Size } from "../../src/lib/size.js";
 import { SingleChildScrollView } from "../../src/lib/single_child_scroll_view.js";
+import { Alignment } from "../../src/lib/alignment.js";
 
 export class StreamPage {
     #debug = true;
@@ -77,13 +78,15 @@ export class StreamPage {
         });
         this.navigateTo = onNavigate;
         this.#widget = new Scaffold({
-            title: 'Home Page',
-            child: new Column({
-                children: [
-                    new Expanded({
-                        child: new Container({
+            title: 'Stream Page',
+            child: new Container({
+                alignment: Alignment.topCenter,
+                child: new Column({
+                    children: [
+                        new Container({
                             color: '#5050ff',
                             height: 60,
+                            alignment: Alignment.center,
                             child: new Row({
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -104,14 +107,14 @@ export class StreamPage {
                                 ],
                             }),
                         }),
-                    }),
-                    new Expanded({
-                        child: new Container({
+                        new Container({
                             color: '#aaaaaa',
-                            child: new Center({
-                                child: new Container({
-                                    width: 200,
-                                    child: new SingleChildScrollView({
+                            alignment: Alignment.center,
+                                alignment: Alignment.center,
+                                child: new SingleChildScrollView({
+                                    child: new Container({
+                                        width: 500,
+                                        alignment: Alignment.center,
                                         child: new Column({
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -280,12 +283,10 @@ export class StreamPage {
                                             ],
                                         }),
                                     }),
-                                    
                                 }),
-                            }),
                         }),
-                    })
-                ],
+                    ],
+                }),
             }),
         });
     }
